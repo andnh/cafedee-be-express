@@ -10,16 +10,27 @@ const getHome = require('./routes/home');
 
 
 //Middlewares
+app.use(express.urlencoded({
+  extended: true
+}));
+app.use(express.json());
+
 app.use('/', getHome)
 app.use('/blog', getBlog)
+
 
 
 // Connect to DB
 
 const uri = process.env.DB_CONNECTION;
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
-  console.log("Connected to DB")
-});
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("Connected to cafedee database")
+  })
+  .catch(err => {
+    console.log("ERR:")
+    console.log(err)
+  })
 
 //Start listening to the server
 app.listen(8080, () => {
