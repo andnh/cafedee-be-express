@@ -7,7 +7,7 @@ const BlogSummarySchema = mongoose.Schema({
     type: String,
     required: true
   },
-  lastActive: String ,
+  dayUpload: String ,
   readingTimeNeed: String,
   // thumbnail: String,
   title: {
@@ -15,9 +15,14 @@ const BlogSummarySchema = mongoose.Schema({
     required: true
   }, 
   summary: {
-    type: String,
+    type: String,   
     require: true
   },
+  content: {
+    type: String,   
+    require: true
+  },
+
   likeCount: Number,
   commentCount: Number,
 })
