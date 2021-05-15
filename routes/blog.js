@@ -12,7 +12,18 @@ router.get('/', async (req, res) => {
 router.get('/view/:id', function(req, res, next){
   BlogSummary.findById(req.params.id, function(err, BlogSummary){
     if (err) console.log(err);
-    res.json(BlogSummary)
+    var data = {
+      username: BlogSummary.username,
+      title: BlogSummary.title,
+      dayUpload: BlogSummary.dayUpload,
+      readingTimeNeed: BlogSummary.readingTimeNeed,
+      title: BlogSummary.title,
+      content: BlogSummary.content,
+      likeCount: BlogSummary.likeCount,
+      commentCount: BlogSummary.commentCount
+  }
+    res.json(data) 
+    
   })
 })
 
@@ -20,10 +31,11 @@ router.put('/update/:id', function(req, res, next){
   var data = {
     username: req.body.username,
     title: req.body.title,
-    lastActive: req.body.lastActive,
+    dayUpload: req.body.dayUpload,
     readingTimeNeed: req.body.readingTimeNeed,
     title: req.body.title,
     summary: req.body.summary,
+    content: req.body.content,
     likeCount: req.body.likeCount,
     commentCount: req.body.commentCount
 }
@@ -45,15 +57,13 @@ router.post('/create', async (req,res) => {
   const blogSummary = new BlogSummary({
     username: req.body.username,
     title: req.body.title,
-    lastActive: req.body.lastActive,
+    dayUpload: req.body.dayUpload,
     readingTimeNeed: req.body.readingTimeNeed,
     title: req.body.title,
     summary: req.body.summary,
+    content: req.body.content,
     likeCount: req.body.likeCount,
-    commentCount: req.body.commentCount
-    
-
-    
+    commentCount: req.body.commentCount  
   })
   try {
     const newBlogSummary = await blogSummary.save();
