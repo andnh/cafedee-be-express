@@ -9,8 +9,8 @@ router.get('/', async (req, res) => {
   res.send(blogSummaries)
 });
 
-router.get('/view/:id', function(req, res, next){
-  BlogSummary.findById(req.params.id, function(err, BlogSummary){
+router.get('/view/', function(req, res, next){
+  BlogSummary.findById(req.query.id, function(err, BlogSummary){
     if (err) console.log(err);
     var data = {
       username: BlogSummary.username,
@@ -27,7 +27,7 @@ router.get('/view/:id', function(req, res, next){
   })
 })
 
-router.put('/update/:id', function(req, res, next){
+router.put('/update/', function(req, res, next){
   var data = {
     username: req.body.username,
     title: req.body.title,
@@ -39,15 +39,15 @@ router.put('/update/:id', function(req, res, next){
     likeCount: req.body.likeCount,
     commentCount: req.body.commentCount
 }
-  BlogSummary.findByIdAndUpdate(req.params.id, data, function(err, BlogSummary){
+  BlogSummary.findByIdAndUpdate(req.query.id, data, function(err, BlogSummary){
     if (err) return next(err);
     res.json(BlogSummary)
   })
 })
 
 // Delete Blog
-router.delete('/delete/:id', function(req,res,next){
-  BlogSummary.findByIdAndRemove(req.params.id, function (err, BlogSummary ) {
+router.delete('/delete/', function(req,res,next){
+  BlogSummary.findByIdAndRemove(req.query.id, function (err, BlogSummary ) {
     if (err) console.log(err);
     res.json(BlogSummary)
    });
