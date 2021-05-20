@@ -7,7 +7,7 @@ require('dotenv/config')
 //Import routes
 const getBlog = require('./routes/blog');
 const getHome = require('./routes/home');
-
+const getComment = require('./routes/comment');
 
 //Middlewares
 app.use((req, res, next) => {
@@ -22,7 +22,7 @@ app.use(express.json());
 
 app.use('/', getHome)
 app.use('/blog', getBlog)
-
+app.use('/comment', getComment)
 
 
 // Connect to DB

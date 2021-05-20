@@ -7,24 +7,31 @@ const BlogSummarySchema = mongoose.Schema({
     type: String,
     required: true
   },
-  dayUpload: String ,
+  dayUpload: String,
   readingTimeNeed: String,
   // thumbnail: String,
   title: {
     type: String,
     required: true
-  }, 
+  },
   summary: {
-    type: String,   
+    type: String,
     require: true
   },
   content: {
-    type: String,   
+    type: String,
     require: true
   },
-
+  imgUrl : String,
   likeCount: Number,
   commentCount: Number,
+
+  tag : String,
+  category: String,
+
+  commentUsername: String,
+  commentContent: String,
+  
 })
 
 const BlogSummary = mongoose.model('BlogSummary', BlogSummarySchema)
