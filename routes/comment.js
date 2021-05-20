@@ -4,13 +4,13 @@ const router = express.Router();
 const Comment = require('../models/Comment')
 
 
-// router.get('/', async (req, res) => {
-//   const comment = await Comment.find({})
-//   res.send(comment)
-// });
+router.get('/', async (req, res) => {
+  const comment = await Comment.find({})
+  res.send(comment)
+});
 
-router.get('/comment/:id', function(req, res, next){
-  Comment.findById(req.params.id, function(err, Comment){
+router.get('/view/', function(req, res, next){
+  Comment.findById(req.query.id, function(err, Comment){
     if (err) console.log(err);
     var data = {
       username: Comment.username,
@@ -21,20 +21,20 @@ router.get('/comment/:id', function(req, res, next){
   })
 })
 
-router.put('/editcomment/:id', function(req, res, next){
+router.put('/editcomment/', function(req, res, next){
   var data = {
     username: req.body.username,
     content: req.body.content
 }
-  Comment.findByIdAndUpdate(req.params.id, data, function(err, Comment){
+  Comment.findByIdAndUpdate(req.query.id, data, function(err, Comment){
     if (err) return next(err);
     res.json(Comment)
   })
 })
 
 // Delete Comment
-router.delete('/deletecomment/:id', function(req,res,next){
-  Comment.findByIdAndRemove(req.params.id, function (err, Comment ) {
+router.delete('/deletecomment/', function(req,res,next){
+  Comment.findByIdAndRemove(req.query.id, function (err, Comment ) {
     if (err) console.log(err);
     res.json(Comment)
    });
@@ -43,7 +43,7 @@ router.delete('/deletecomment/:id', function(req,res,next){
 router.post('/createcomment', async (req,res) => {
   const comment = new Comment({
     username: req.body.username,
-    content: req.body.conten
+    content: req.body.content
   })
   try {
     const newComment = await comment.save();
