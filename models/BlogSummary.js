@@ -26,11 +26,7 @@ const BlogSummarySchema = mongoose.Schema({
   likeCount: Number,
   commentCount: Number,
 
-  tag : String,
-  category: String,
-
-  commentUsername: String,
-  commentContent: String,
+    
   
 })
 

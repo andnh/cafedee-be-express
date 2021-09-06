@@ -92,7 +92,7 @@ router.put('/update/', function (req, res, next) {
 router.delete('/delete/', function (req, res, next) {
   BlogSummary.findByIdAndRemove(req.query.id, function (err, BlogSummary) {
     if (err) console.log(err);
-     res.json(BlogSummary)
+    // res.json(BlogSummary)
   });
 })
 
